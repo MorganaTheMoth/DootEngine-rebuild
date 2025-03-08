@@ -30,51 +30,16 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 
 int main ()
 {
-	// Tell the window to use vysnc and work on high DPI displays
-	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
-
-	// Create the window and OpenGL context
-	InitWindow(1280, 800, "Hello Raylib");
-
-	// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
-	SearchAndSetResourceDir("resources");
-
-	// Load a texture from the resources directory
-	Texture wabbit = LoadTexture("wabbit_alpha.png");
-	bool draw = true;
-	int i = 0;
-
-	// game loop
-	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
-	{
-		// drawing
+	const int screenWidth = 800;
+	const int screenHeight = 800;
+	InitWindow(screenWidth, screenHeight, "raylib - example window");
+	SetTargetFPS(60);
+	while(!WindowShouldClose()){
 		BeginDrawing();
-
-		// Setup the backbuffer for drawing (clear color and depth buffers)
-		ClearBackground(BLACK);
-
-		// draw our texture to the screen
-		DrawTexture(wabbit, 400, 200, WHITE);
-		if (draw) {
-			// draw some text using the default font
-			DrawText("Hello Raylib", 200, 200, 20, WHITE);
-			draw = !draw;
-		}
-		else {
-			// draw some text using the default font
-			DrawText("Hello Raylib", 200, 200, 20, RED);
-			draw = !draw;
-		}
-
-		// end the frame and get ready for the next one  (display frame, poll input, etc...)
+		ClearBackground(RAYWHITE);
+		DrawText("Hello world!", 200, 200, 20, BLACK);
 		EndDrawing();
 	}
-
-	// cleanup
-	// unload our texture so it can be cleaned up
-	UnloadTexture(wabbit);
-
-	// destory the window and cleanup the OpenGL context
 	CloseWindow();
 	return 0;
 }
